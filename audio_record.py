@@ -46,6 +46,6 @@ def record_audio(filename, record_seconds):
     return None
 
 
-record_audio(input() + ".wav", input())
+record_audio(input() + ".wav", int(input()))
 
 
