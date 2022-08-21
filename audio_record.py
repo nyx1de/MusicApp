@@ -47,5 +47,5 @@ def record_audio(filename, record_seconds):
 
 
 record_audio(input() + ".wav", 5)
-# ху
+
 
