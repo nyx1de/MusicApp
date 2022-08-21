@@ -1,6 +1,5 @@
 # MusicApp
 Made by N. Petrov and V. Karasov
-
   __  __                 _                                   
  |  \/  |               (_)            /\                    
  | \  / |  _   _   ___   _    ___     /  \     _ __    _ __  
