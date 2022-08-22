@@ -4,6 +4,9 @@ import wave
 
 
 def record_audio(filename, record_seconds):
+    filename = input() + ".wav"
+    record_seconds = int(input())
+    
     p = pyaudio.PyAudio()  # Создать интерфейс для PortAudio
 
     # for i in range(p.get_device_count()):
@@ -44,6 +47,3 @@ def record_audio(filename, record_seconds):
     wf.writeframes(b''.join(frames))
     wf.close()
     return None
-
-
-record_audio(input() + ".wav", int(input()))
