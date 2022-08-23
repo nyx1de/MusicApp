@@ -14,6 +14,7 @@ stream = p.open(format=pyaudio.paInt16,
                 channels=1,
                 rate=RATE,
                 input=True,
+                input_device_index=int(input("введите устройство: ")),
                 frames_per_buffer=CHUNK)
 
 while True:
@@ -22,8 +23,8 @@ while True:
     if audio_data[1] > 0:
         db = 20 * log10(audio_data[1])
         db = int(db)
-        # print(db, end='')
-        # print('Db', end=' ')
+        print(db, end='')
+        print('Db', end=' ')
         # Take the fft and square each value
         fftData = abs(np.fft.rfft(indata)) ** 2
         # find the maximum
@@ -37,26 +38,19 @@ while True:
             if thefreq > 1700 or thefreq < 70:
                 continue
             else:
-                print(db, end='')
-                print('Db', end=' ')
-                print(int(thefreq), end='')
-                print('Hz', end=' ')
+                print(int(thefreq), end=' ')
                 print(librosa.hz_to_note(thefreq))
         else:
             thefreq = which * RATE / CHUNK
             if thefreq > 1700 or thefreq < 70:
                 continue
             else:
-                print(db, end='')
-                print('Db', end=' ')
-                print(int(thefreq), end='')
-                print('Hz', end=' ')
+                print(int(thefreq), end=' ')
                 print(librosa.hz_to_note(thefreq))
     else:
         continue
 
 stream.close()
 p.terminate()
-
 
 
