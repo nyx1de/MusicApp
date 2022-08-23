@@ -37,14 +37,16 @@ while True:
             if thefreq > 1700 or thefreq < 70:
                 continue
             else:
-                print(int(thefreq), end=' ')
+                print(int(thefreq), end='')
+                print('Hz', end=' ')
                 print(librosa.hz_to_note(thefreq))
         else:
             thefreq = which * RATE / CHUNK
             if thefreq > 1700 or thefreq < 70:
                 continue
             else:
-                print(int(thefreq), end=' ')
+                print(int(thefreq), end='')
+                print('Hz', end=' ')
                 print(librosa.hz_to_note(thefreq))
     else:
         continue
