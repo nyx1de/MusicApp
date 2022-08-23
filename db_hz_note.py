@@ -14,6 +14,7 @@ stream = p.open(format=pyaudio.paInt16,
                 channels=1,
                 rate=RATE,
                 input=True,
+                input_device_index=int(input("введите устройство: ")),
                 frames_per_buffer=CHUNK)
 
 while True:
@@ -37,16 +38,14 @@ while True:
             if thefreq > 1700 or thefreq < 70:
                 continue
             else:
-                print(int(thefreq), end='')
-                print('Hz', end=' ')
+                print(int(thefreq), end=' ')
                 print(librosa.hz_to_note(thefreq))
         else:
             thefreq = which * RATE / CHUNK
             if thefreq > 1700 or thefreq < 70:
                 continue
             else:
-                print(int(thefreq), end='')
-                print('Hz', end=' ')
+                print(int(thefreq), end=' ')
                 print(librosa.hz_to_note(thefreq))
     else:
         continue
