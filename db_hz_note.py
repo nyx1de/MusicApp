@@ -22,35 +22,40 @@ while True:
     audio_data = np.fromstring(indata, dtype=np.short)
     if audio_data[1] > 0:
         db = 20 * log10(audio_data[1])
-        db = int(db)
-        # Take the fft and square each value
-        fftData = abs(np.fft.rfft(indata)) ** 2
-        # find the maximum
-        which = fftData[1:].argmax() + 1
-        # use quadratic interpolation around the max
-        if which != len(fftData) - 1:
-            y0, y1, y2 = np.log(fftData[which - 1:which + 2:])
-            x1 = (y2 - y0) * .5 / (2 * y1 - y2 - y0)
-            # find the frequency and output it
-            thefreq = (which + x1) * RATE / CHUNK
-            if thefreq > 1700 or thefreq < 70:
-                continue
+        if db > 30 and db < 80:
+            db = int(db)
+            # print(db, end='')
+            # print('Db', end=' ')
+            # Take the fft and square each value
+            fftData = abs(np.fft.rfft(indata)) ** 2
+            # find the maximum
+            which = fftData[1:].argmax() + 1
+            # use quadratic interpolation around the max
+            if which != len(fftData) - 1:
+                y0, y1, y2 = np.log(fftData[which - 1:which + 2:])
+                x1 = (y2 - y0) * .5 / (2 * y1 - y2 - y0)
+                # find the frequency and output it
+                thefreq = (which + x1) * RATE / CHUNK
+                if thefreq > 1700 or thefreq < 70:
+                    continue
+                else:
+                    print(db, end='')
+                    print('Db', end=' ')
+                    print(int(thefreq), end='')
+                    print('Hz', end=' ')
+                    print(librosa.hz_to_note(thefreq))
             else:
-                print(db, end='')
-                print('Db', end=' ')
-                print(int(thefreq), end='')
-                print('Hz', end=' ')
-                print(librosa.hz_to_note(thefreq))
+                thefreq = which * RATE / CHUNK
+                if thefreq > 1700 or thefreq < 70:
+                    continue
+                else:
+                    print(db, end='')
+                    print('Db', end=' ')
+                    print(int(thefreq), end='')
+                    print('Hz', end=' ')
+                    print(librosa.hz_to_note(thefreq))
         else:
-            thefreq = which * RATE / CHUNK
-            if thefreq > 1700 or thefreq < 70:
-                continue
-            else:
-                print(db, end='')
-                print('Db', end=' ')
-                print(int(thefreq), end='')
-                print('Hz', end=' ')
-                print(librosa.hz_to_note(thefreq))
+            continue
     else:
         continue
 
