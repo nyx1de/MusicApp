@@ -23,8 +23,8 @@ while True:
     if audio_data[1] > 0:
         db = 20 * log10(audio_data[1])
         db = int(db)
-        print(db, end='')
-        print('Db', end=' ')
+        # print(db, end='')
+        # print('Db', end=' ')
         # Take the fft and square each value
         fftData = abs(np.fft.rfft(indata)) ** 2
         # find the maximum
